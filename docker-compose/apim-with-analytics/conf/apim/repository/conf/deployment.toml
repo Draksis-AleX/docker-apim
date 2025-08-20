@@ -28,11 +28,11 @@ password = "wso2carbon"
 driver = "com.mysql.cj.jdbc.Driver"
 
 [keystore.tls]
-file_name =  "wso2carbon.jks"
-type =  "JKS"
-password =  "wso2carbon"
-alias =  "wso2carbon"
-key_password =  "wso2carbon"
+file_name = "wso2carbon.jks"
+type = "JKS"
+password = "wso2carbon"
+alias = "wso2carbon"
+key_password = "wso2carbon"
 
 #[keystore.listener_profile]
 #bind_address = "0.0.0.0"
@@ -63,8 +63,8 @@ display_in_api_console = true
 description = "This is a hybrid gateway that handles both production and sandbox token traffic."
 show_as_token_endpoint_url = true
 service_url = "https://localhost:${mgt.transport.https.port}/services/"
-username= "${admin.username}"
-password= "${admin.password}"
+username = "${admin.username}"
+password = "${admin.password}"
 ws_endpoint = "ws://localhost:9099"
 wss_endpoint = "wss://localhost:8099"
 http_endpoint = "http://localhost:${http.nio.port}"
@@ -73,7 +73,7 @@ websub_event_receiver_http_endpoint = "http://localhost:9021"
 websub_event_receiver_https_endpoint = "https://localhost:8021"
 
 [apim.sync_runtime_artifacts.gateway]
-gateway_labels =["Default"]
+gateway_labels = ["Default"]
 
 #[apim.cache.gateway_token]
 #enable = true
@@ -103,10 +103,10 @@ gateway_labels =["Default"]
 #[apim.cache.tags]
 #expiry_time = "2m"
 
-[apim.analytics]	
-enable = true	
-config_endpoint = "https://analytics-event-auth.choreo.dev/auth/v1"	
-auth_token = "<on-prem-key>"
+[apim.analytics]
+enable = true
+config_endpoint = "https://analytics-event-auth.choreo.dev/auth/v1"
+auth_token = "51ba0865-b5b6-4e9c-ba80-f30e3b6110ae"
 
 [apim.ai]
 enable = true
@@ -169,8 +169,15 @@ enable_lightweight_apikey_generation = true
 
 [apim.cors]
 allow_origins = "*"
-allow_methods = ["GET","PUT","POST","DELETE","PATCH","OPTIONS"]
-allow_headers = ["authorization","Access-Control-Allow-Origin","Content-Type","SOAPAction","apikey","Internal-Key"]
+allow_methods = ["GET", "PUT", "POST", "DELETE", "PATCH", "OPTIONS"]
+allow_headers = [
+    "authorization",
+    "Access-Control-Allow-Origin",
+    "Content-Type",
+    "SOAPAction",
+    "apikey",
+    "Internal-Key",
+]
 allow_credentials = false
 
 #[apim.throttling]
@@ -250,8 +257,8 @@ allow_credentials = false
 #persistent_notifier.password = "root"
 
 [[event_handler]]
-name="userPostSelfRegistration"
-subscriptions=["POST_ADD_USER"]
+name = "userPostSelfRegistration"
+subscriptions = ["POST_ADD_USER"]
 
 [service_provider]
 sp_name_regex = "^[\\sa-zA-Z0-9._-]*$"

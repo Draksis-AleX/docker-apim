@@ -94,16 +94,17 @@ RUN \
 COPY --chown=wso2carbon:wso2 docker-entrypoint.sh ${USER_HOME}/
     
 # add the WSO2 product distribution to user's home directory
+COPY wso2am-4.5.0.17.zip ${WSO2_SERVER}.zip
+# Estrai il file ZIP e configura il server
 RUN \
-    wget -O ${WSO2_SERVER}.zip "${WSO2_SERVER_DIST_URL}" \
-    && unzip -d ${USER_HOME} ${WSO2_SERVER}.zip \
-    && chown wso2carbon:wso2 -R ${WSO2_SERVER_HOME} \
-    && mkdir ${USER_HOME}/wso2-tmp \
-    && bash -c 'mkdir -p ${USER_HOME}/solr/{indexed-data,database}' \
-    && chown wso2carbon:wso2 -R ${USER_HOME}/solr \
-    && cp -r ${WSO2_SERVER_HOME}/repository/deployment/server/synapse-configs ${USER_HOME}/wso2-tmp \
-    && cp -r ${WSO2_SERVER_HOME}/repository/deployment/server/executionplans ${USER_HOME}/wso2-tmp \
-    && rm -f ${WSO2_SERVER}.zip
+    unzip -d ${USER_HOME} ${WSO2_SERVER}.zip && \
+    chown wso2carbon:wso2 -R ${WSO2_SERVER_HOME} && \
+    mkdir ${USER_HOME}/wso2-tmp && \
+    bash -c 'mkdir -p ${USER_HOME}/solr/{indexed-data,database}' && \
+    chown wso2carbon:wso2 -R ${USER_HOME}/solr && \
+    cp -r ${WSO2_SERVER_HOME}/repository/deployment/server/synapse-configs ${USER_HOME}/wso2-tmp && \
+    cp -r ${WSO2_SERVER_HOME}/repository/deployment/server/executionplans ${USER_HOME}/wso2-tmp && \
+    rm -f ${WSO2_SERVER}.zip
 
 # remove unnecesary packages
 RUN apk del netcat-openbsd
@@ -120,4 +121,4 @@ ENV WORKING_DIRECTORY=${USER_HOME} \
 EXPOSE 9763 9443 9999 11111 8280 8243 5672 9711 9611 9099
 
 # initiate container and start WSO2 Carbon server
-ENTRYPOINT ["/home/wso2carbon/docker-entrypoint.sh"]
+ENTRYPOINT ["bash", "/home/wso2carbon/docker-entrypoint.sh"]
