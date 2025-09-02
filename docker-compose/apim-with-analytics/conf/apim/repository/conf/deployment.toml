@@ -105,8 +105,7 @@ gateway_labels = ["Default"]
 
 [apim.analytics]
 enable = true
-config_endpoint = "https://analytics-event-auth.choreo.dev/auth/v1"
-auth_token = "51ba0865-b5b6-4e9c-ba80-f30e3b6110ae"
+type = "elk"
 
 [apim.ai]
 enable = true
